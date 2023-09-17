@@ -111,7 +111,7 @@ export default defineNuxtConfig({
       // Use the instance where Elk has its Mastodon account as the default
       defaultServer: 'm.webtoo.ls',
       singleInstance: false,
-      neoServer: '',
+      neodbServer: process.env.NUXT_NEODB_SERVER_URL ?? '',
     },
     storage: {
       fsBase: 'node_modules/.cache/app',
