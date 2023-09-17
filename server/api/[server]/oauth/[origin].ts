@@ -35,7 +35,11 @@ export default defineEventHandler(async (event) => {
       retry: 3,
     })
 
-    const url = `/signin/callback?${stringifyQuery({ server, token: result.access_token, vapid_key: app.vapid_key })}`
+    // TODO exchange mastodon token for neo token
+    const { public: { neoServer } } = useRuntimeConfig()
+    const neo_token = `fetchtokenfrom${neoServer}`
+
+    const url = `/signin/callback?${stringifyQuery({ server, token: result.access_token, vapid_key: app.vapid_key, neo_token })}`
     await sendRedirect(event, url, 302)
   }
   catch (e) {
