@@ -2,16 +2,17 @@ import createClient from 'openapi-fetch'
 import type { paths } from './generated'
 
 // will be initialized by the plugin neo
-export const useNeodbToken = (init?: string) => useState<string>('neoToken', () => init ?? '')
+export const useNeodbToken = () => useState<string>('neoToken')
 
 export function useNeodbClient() {
   const { public: { neodbServer } } = useRuntimeConfig()
+  const token = useNeodbToken()
   const { GET, PUT, DELETE, POST } = createClient<paths>({
     baseUrl: neodbServer,
     // @ts-expect-error ofetch is compatible despite typing
-    fetch: $fetch,
+    fetch: useFetch,
     headers: {
-      Authorization: `Bearer ${useNeodbToken().value}`,
+      Authorization: `Bearer ${token.value}`,
     },
   })
   return {

@@ -35,11 +35,16 @@ export default defineEventHandler(async (event) => {
       retry: 3,
     })
 
-    // TODO exchange mastodon token for neo token
-    const { public: { neodbServer } } = useRuntimeConfig()
-    const neo_token = `fetchtokenfrom${neodbServer}`
+    const query: any = { server, token: result.access_token, vapid_key: app.vapid_key }
 
-    const url = `/signin/callback?${stringifyQuery({ server, token: result.access_token, vapid_key: app.vapid_key, neo_token })}`
+    const { public: { neodbServer } } = useRuntimeConfig()
+    if (neodbServer) {
+      // TODO exchange mastodon token for neo token
+      const neo_token = '799ZuXhEkyJsnBcTv8jOyEZg3hv8mK' || `fetchtokenfrom${neodbServer}`
+      query.neo_token = neo_token
+    }
+
+    const url = `/signin/callback?${stringifyQuery(query)}`
     await sendRedirect(event, url, 302)
   }
   catch (e) {
