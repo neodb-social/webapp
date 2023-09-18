@@ -1,7 +1,9 @@
 export default defineNuxtPlugin(() => {
-  const { params } = useRoute()
-  if (typeof params.neo_token === 'string') {
+  const { query } = useRoute()
+
+  if (typeof query.neo_token === 'string') {
+    // TODO cache the token in IDB as the masto token
     const neoToken = useNeodbToken()
-    neoToken.value = params.neo_token
+    neoToken.value = query.neo_token
   }
 })
