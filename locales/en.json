@@ -302,6 +302,9 @@
     "toggle_theme": "Toggle Theme",
     "zen_mode": "Zen Mode"
   },
+  "neo": {
+    "not_authenticated": "Failed to authenticate your NeoDB account."
+  },
   "notification": {
     "favourited_post": "favorited your post",
     "followed_you": "followed you",

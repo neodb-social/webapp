@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
     const { public: { neodbServer } } = useRuntimeConfig()
     if (neodbServer) {
       // TODO exchange mastodon token for neo token
-      const neo_token = '799ZuXhEkyJsnBcTv8jOyEZg3hv8mK' || `fetchtokenfrom${neodbServer}`
+      const neo_token = 'foobar' || `fetchtokenfrom${neodbServer}`
       query.neo_token = neo_token
     }
 

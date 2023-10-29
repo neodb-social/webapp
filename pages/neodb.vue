@@ -15,7 +15,11 @@ useHydratedHead({
         <span>{{ $t('nav.neodb') }}</span>
       </NuxtLink>
     </template>
-
-    <TimelineNeo v-if="isHydrated" />
+    <template v-if="isHydrated">
+      <TimelineNeo v-if="isNeoAuthenticated" />
+      <div v-else>
+        {{ $t('neo.not_authenticated') }}
+      </div>
+    </template>
   </MainContent>
 </template>
